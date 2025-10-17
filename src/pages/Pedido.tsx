@@ -103,26 +103,24 @@ const Pedido = () => {
       .map(id => sabores.find(s => s.id === id)?.nome)
       .join(", ");
     const borda = bordas.find(b => b.id === bordaSelecionada);
-    
+
     let mensagem = `🍕 *Novo Pedido!*\n\n`;
     mensagem += `*Tamanho:* ${tamanho?.nome} (${tamanho?.tamanho})\n`;
     mensagem += `*Sabores:* ${saboresNomes}\n`;
     mensagem += `*Borda:* ${borda?.nome}\n`;
-    
+
     if (ingredientesAdicionar.length > 0) {
       mensagem += `*Adicionar:* ${ingredientesAdicionar.join(", ")}\n`;
     }
     if (ingredientesRemover.length > 0) {
       mensagem += `*Remover:* ${ingredientesRemover.join(", ")}\n`;
     }
-    
+
     mensagem += `\n*Total:* R$ ${calcularTotal().toFixed(2)}`;
 
-const mensagem = "Olá! Gostaria de finalizar meu pedido 😊";
-const whatsappUrl = `https://wa.me/5551997652633?text=${encodeURIComponent(mensagem)}`;
-window.open(whatsappUrl, '_blank');
-
-
+    const whatsappUrl = `https://wa.me/5551997652633?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <div className="min-h-screen py-8 px-4">
@@ -315,59 +313,47 @@ window.open(whatsappUrl, '_blank');
 
                   {saboresSelecionados.length > 0 && (
                     <div className="pb-4 border-b">
-                      <p className="text-sm text-muted-foreground mb-2">Sabores</p>
-                      {saboresSelecionados.map(id => (
-                        <p key={id} className="font-semibold">
-                          • {sabores.find(s => s.id === id)?.nome}
-                        </p>
-                      ))}
+                      <p className="text-sm text-muted-foreground">Sabores</p>
+                      <ul className="list-disc list-inside">
+                        {saboresSelecionados.map(id => (
+                          <li key={id}>{sabores.find(s => s.id === id)?.nome}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
 
                   {bordaSelecionada && (
                     <div className="pb-4 border-b">
                       <p className="text-sm text-muted-foreground">Borda</p>
-                      <p className="font-semibold">
-                        {bordas.find(b => b.id === bordaSelecionada)?.nome}
-                      </p>
+                      <p className="font-semibold">{bordas.find(b => b.id === bordaSelecionada)?.nome}</p>
                     </div>
                   )}
 
                   {ingredientesAdicionar.length > 0 && (
                     <div className="pb-4 border-b">
-                      <p className="text-sm text-muted-foreground mb-2">Adicionar</p>
-                      {ingredientesAdicionar.map(ing => (
-                        <p key={ing} className="font-semibold text-accent">+ {ing}</p>
-                      ))}
+                      <p className="text-sm text-muted-foreground">Adicionar</p>
+                      <p>{ingredientesAdicionar.join(", ")}</p>
                     </div>
                   )}
 
                   {ingredientesRemover.length > 0 && (
                     <div className="pb-4 border-b">
-                      <p className="text-sm text-muted-foreground mb-2">Remover</p>
-                      {ingredientesRemover.map(ing => (
-                        <p key={ing} className="font-semibold text-destructive">- {ing}</p>
-                      ))}
+                      <p className="text-sm text-muted-foreground">Remover</p>
+                      <p>{ingredientesRemover.join(", ")}</p>
                     </div>
                   )}
                 </div>
 
-                <div className="mb-6 p-4 bg-muted rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-semibold">Total</span>
-                    <span className="text-3xl font-bold text-primary">
-                      R$ {calcularTotal().toFixed(2)}
-                    </span>
-                  </div>
+                <div className="text-xl font-bold text-primary mb-6">
+                  Total: R$ {calcularTotal().toFixed(2)}
                 </div>
 
                 <Button
                   size="lg"
-                  className="w-full text-lg"
                   onClick={finalizarPedido}
                   disabled={!tamanhoSelecionado || saboresSelecionados.length === 0}
                 >
-                  Finalizar no WhatsApp
+                  Finalizar Pedido
                 </Button>
               </CardContent>
             </Card>

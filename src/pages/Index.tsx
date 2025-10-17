@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Pizza, ChefHat, Timer, Heart } from "lucide-react";
-import pizzaHero from "@/assets/pizza-hero.jpg";
+import pizzaHero from "../assets/pizza-hero.jpg"; // Ajuste o caminho
 
 const Index = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Index = () => {
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <Pizza className="w-20 h-20 mx-auto mb-6 text-primary animate-[float_3s_ease-in-out_infinite]" />
+            <Pizza className="w-20 h-20 mx-auto mb-6 text-primary" />
             <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 drop-shadow-2xl">
               Pizza Artesanal
             </h1>
@@ -32,7 +32,7 @@ const Index = () => {
             <Button 
               size="lg"
               onClick={() => navigate('/pedido')}
-              className="text-xl px-12 py-8 bg-gradient-to-r from-primary to-[hsl(8_88%_54%)] hover:shadow-2xl hover:scale-105 transition-all duration-300 animate-[pulse-glow_2s_ease-in-out_infinite]"
+              className="text-xl px-12 py-8 bg-gradient-to-r from-primary to-[hsl(8_88%_54%)] hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               Monte sua Pizza
             </Button>
